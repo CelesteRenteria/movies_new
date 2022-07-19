@@ -7,6 +7,8 @@ class MoviesProvider extends ChangeNotifier {
   final String _baseUrl = 'api.themoviedb.org';
   final String _language = "es-ES";
 
+  List<dynamic> dataMovies = [];
+
  
   MoviesProvider(){
     this.getMovies();
@@ -23,6 +25,11 @@ class MoviesProvider extends ChangeNotifier {
   if (response.statusCode == 200) {
     final Map<String, dynamic> jsonResponse = json.decode(response.body);
     print(jsonResponse);
+
+    dataMovies = jsonResponse["results"];
+    notifyListeners();
+
+
 
   } else {
     print('Request failed with status: ${response.statusCode}.');

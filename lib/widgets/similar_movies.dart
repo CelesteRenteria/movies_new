@@ -1,24 +1,29 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_new/screens/details_screen.dart';
+import 'package:movies_new/screens/details_screen2.dart';
+import 'package:movies_new/widgets/widgets.dart';
 
-class CardSwiper extends StatelessWidget {
+import '../screens/details_screen.dart';
+
+class SimilarMovies extends StatelessWidget {
   final List<dynamic> movies;
-  const CardSwiper({Key? key, required this.movies}) : super(key: key);
+  
+  const SimilarMovies({Key? key, required this.movies}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     const base = "https://image.tmdb.org/t/p/w500";
     final size = MediaQuery.of(context).size;
+
     return Container(
       width: double.infinity,
-      height: size.height,
+      height:size.height,
       child: Swiper(
         itemCount: movies.length,
         layout: SwiperLayout.STACK,
-        itemHeight: 600.0, //40%
-        itemWidth: 350.0, //60%
-        itemBuilder: (_, int index) {
-          //hace como si fuera un for
+        itemHeight: 600,
+        itemWidth: 350,
+        itemBuilder: (_,int index){
           final movie = movies[index];
           final imageURL = base + movie["poster_path"];
           final Id = movie["id"];
@@ -27,7 +32,7 @@ class CardSwiper extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          DetailsScreen(Idmovie: index))),
+                          DetailsScreen2(Idmovie: index))),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 //child: Expanded(
